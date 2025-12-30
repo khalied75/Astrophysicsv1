@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- css -->
+       <link href="./output.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+     <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+        }
+        .astronomy-bg {
+            background-image: url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #4f46e5;
+            bottom: -5px;
+            right: 0;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+       
+        .highlight-box {
+            border-right: 4px solid #4f46e5;
+            background: linear-gradient(90deg, rgba(79, 70, 229, 0.1), transparent);
+        }
+        </style>
+</head>
+<body class="bg-gray-900 text-white">
+      <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <!-- العنوان الرئيسي -->
+            <div class="flex flex-col md:flex-row justify-center items-center mb-6 md:mb-4">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center ml-3">
+                        <span class="text-white text-xl font-bold">🌌</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-2xl md:text-3xl font-bold">الموسوعة الفلكية الشاملة</h1>
+                        <p class="text-gray-300 text-sm md:text-base">رحلة استكشافية في عالم الفلك والفضاء</p>
+                    </div>
+                </div>
+                
+                <!-- زر البحث (للمستقبل) -->
+                <!-- <div class="relative">
+                    <input type="text" placeholder="ابحث في الموسوعة..." 
+                           class="bg-gray-800 text-white px-4 py-2 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+                           disabled>
+                    <span class="absolute left-3 top-2.5 text-gray-400 text-xs">قريباً</span>
+                </div> -->
+            </div>
+            
+            <!-- قائمة التنقل الرئيسية للمستقبل -->
+            <div class="border-t border-gray-700 pt-4">
+                <!-- <h3 class="text-lg font-bold text-center mb-4 text-indigo-300">أقسام الموسوعة (ستكون متاحة قريباً)</h3> -->
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                    <!-- أنواع الثقوب السوداء -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع الثقوب السوداء
+                    </a>
+                    
+                    <!-- أنواع المجرات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع المجرات
+                    </a>
+                    
+                    <!-- أنواع النجوم -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع النجوم
+                    </a>
+                    
+                    <!-- أنواع الكوكبات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع الكوكبات
+                    </a>
+                    
+                    <!-- أنواع الكويكبات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع الكويكبات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- الهيرو / العنوان الرئيسي -->
+    <section class="relative astronomy-bg py-24 px-6">
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <div class="container mx-auto relative z-10 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">الكون الواسع</h2>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">رحلة استكشافية في أعماق الفضاء لفهم أسرار الكون والظواهر الفلكية المذهلة</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#intro" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium text-lg">ابدأ الرحلة</a>
+                <a href="#topics" class="px-6 py-3 bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 rounded-lg font-medium text-lg">استعرض المواضيع</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المقدمة -->
+    <section id="intro" class="container mx-auto py-16 px-6">
+        <div class="max-w-4xl mx-auto text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">مرحباً بكم في الموسوعة الفلكية</h2>
+            <p class="text-lg leading-relaxed text-gray-300">
+                هذه الموسوعة تهدف إلى تقديم معلومات شاملة عن الظواهر الفلكية الرئيسية بشكل مبسط وسهل الفهم. 
+                نبدأ هنا بمقدمة عامة عن أهم المواضيع الفلكية، ثم سنقوم لاحقاً بتفصيل كل موضوع في صفحات مستقلة.
+            </p>
+        </div>
+    </section>
+
+    <!-- المواضيع الرئيسية -->
+    <section id="topics" class="container mx-auto py-8 px-6">
+        <h2 class="section-title text-3xl md:text-4xl font-bold mb-12 text-center">المواضيع الفلكية الرئيسية</h2>
+        
+        <!-- الثقوب السوداء -->
+        <div class="mb-20 scroll-mt-20 highlight-box p-6 rounded-xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">⚫</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold">الثقوب السوداء</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-4">
+                        الثقوب السوداء هي مناطق في الفضاء ذات جاذبية هائلة لا يمكن لأي شيء، حتى الضوء، الإفلات منها. تتشكل عندما يصل نجم ضخم إلى نهاية حياته وينهار تحت تأثير جاذبيته.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        <span class="font-bold text-indigo-300">كيف تنتهي النجم ليوصل مرحلة ثقب أسود:</span> عندما ينفذ وقود الهيدروجين في النجم الضخم (أكبر من 3-4 أضعاف شمسنا)، يتوقف الاندماج النووي في لب النجم، مما يؤدي إلى انهياره تحت وزنه. هذه العملية تنتج انفجارًا هائلًا (سوبرنوفا)، وإذا كان اللب المتبقي كبيرًا بما يكفي، فإنه يستمر في الانهيار ليشكل ثقبًا أسود.
+                    </p>
+                    <div class="mt-6">
+                        <span class="text-gray-400">أنواع ستصفحها لاحقاً:</span>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الثقوب السوداء النجمية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الثقوب السوداء الوسطى</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الثقوب السوداء الهائلة</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-24 h-24 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
+                            <span class="text-5xl">🌌</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 text-center">معلومة سريعة</h4>
+                    <p class="text-center">
+                        يوجد ثقب أسود هائل في مركز مجرة درب التبانة يسمى "القوس A*" تبلغ كتلته حوالي 4 ملايين مرة كتلة الشمس.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- المجرات -->
+        <div class="mb-20 scroll-mt-20 highlight-box p-6 rounded-xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">🌀</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold">المجرات</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-4">
+                        المجرات هي أنظمة ضخمة من النجوم، الغبار، والغاز المترابط بفعل الجاذبية. تحتوي مجرتنا (درب التبانة) على أكثر من 100 مليار نجم.
+                    </p>
+                    <div class="space-y-4 mb-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-xl font-bold text-blue-300 mb-2">المجرات الحلزونية</h4>
+                            <p>لها أذرع تلتف من المركز، مثل مجرة درب التبانة وأندروميدا. تحتوي على نجوم جديدة وتتشكل فيها النجوم.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-xl font-bold text-blue-300 mb-2">المجرات الحلزونية القضيبية</h4>
+                            <p>لها قضيب مركزي من النجوم يخرج منه الأذرع الحلزونية. غالبية المجرات الحلزونية هي قضيبية.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-xl font-bold text-blue-300 mb-2">المجرات الإهليلجية</h4>
+                            <p>شكلها بيضوي أو كروي، وتحتوي على نجوم قديمة بشكل رئيسي. تتراوح من كروية إلى بيضوية طويلة.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <span class="text-gray-400">أنواع ستصفحها لاحقاً:</span>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الحلزونية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الحلزونية القضيبية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الإهليلجية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">غير المنتظمة</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="bg-gradient-to-tr from-blue-900 to-indigo-900 p-8 rounded-2xl shadow-xl h-full card-hover flex flex-col items-center justify-center">
+                        <div class="w-32 h-32 mb-6 flex items-center justify-center">
+                            <div class="w-full h-full rounded-full border-4 border-blue-400 flex items-center justify-center animate-spin-slow">
+                                <div class="w-24 h-24 rounded-full border-2 border-blue-300"></div>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">الكون المرصود</h3>
+                        <p class="text-center">يحتوي الكون المرصود على أكثر من 100 مليار مجرة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الكوكبات -->
+        <div class="mb-20 scroll-mt-20 highlight-box p-6 rounded-xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">⭐</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold">الكوكبات والأنماط النجمية</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-4">
+                        الكوكبات هي أنماط نجمية تخيلها القدماء لتمثل أشكالًا من الأساطير والحيوانات. هناك 88 كوكبة معترف بها رسميًا تغطي السماء بأكملها.
+                    </p>
+                    <div class="space-y-4 mb-4">
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-xl font-bold text-cyan-300 mb-2">كوكبة الأسد</h4>
+                            <p>إحدى كوكبات دائرة البروج، تمثل الأسد، وتحتوي على نجوم لامعة مثل النجم Regulus.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <h4 class="text-xl font-bold text-cyan-300 mb-2">كوكبة الجبار (رجل الجبار)</h4>
+                            <p>من أشهر الكوكبات في السماء، تحتوي على سديم الجبار الشهير وحزام الجبار المكون من ثلاثة نجوم.</p>
+                        </div>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-4">
+                        الكويكبات هي أجسام صخرية تدور حول الشمس، معظمها موجود في حزام الكويكبات بين المريخ والمشتري. تختلف عن المذنبات التي تتكون من جليد وغبار.
+                    </p>
+                    <div class="mt-6">
+                        <span class="text-gray-400">أنواع ستصفحها لاحقاً:</span>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الكوكبات الشمالية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الكوكبات الجنوبية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">كوكبات البروج</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-2xl shadow-xl card-hover">
+                    <div class="flex justify-center mb-6">
+                        <div class="relative">
+                            <div class="w-24 h-24 border-2 border-cyan-400 rounded-full"></div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <div class="w-16 h-16 border-2 border-cyan-300 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4 text-center">الكوكبات النجمية</h4>
+                    <p class="text-center">
+                        استخدمت الكوكبات للملاحة منذ آلاف السنين، ولا زالت تستخدم في علم الفلك الحديث لتنظيم النجوم وتحديد مواقع الأجرام السماوية.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- النجوم -->
+        <div class="scroll-mt-20 highlight-box p-6 rounded-xl">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">☀️</span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold">النجوم</h3>
+                    </div>
+                    <p class="text-lg leading-relaxed mb-4">
+                        النجوم هي أجرام سماوية ضخمة مضيئة بذاتها، تتكون بشكل رئيسي من الهيدروجين والهيليوم، وتنتج الطاقة من خلال الاندماج النووي في لبها.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-4">
+                        <span class="font-bold text-yellow-300">كيف تتكون النجوم:</span> تتكون النجوم من سحب ضخمة من الغاز والغبار (السدم) التي تنهار تحت تأثير جاذبيتها. مع زيادة الضغط ودرجة الحرارة في المركز، تبدأ ذرات الهيدروجين في الاندماج لتكوين الهيليوم، مما يطلق كميات هائلة من الطاقة.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-6">
+                        عملية الاندماج النووي هي ما يجعل النجوم تضيء، حيث تتصادم ذرات الهيدروجين بفعل قوة ضغط الجاذبية الهائلة في لب النجم، مطلقةً الطاقة التي تصل إلينا كضوء وحرارة.
+                    </p>
+                    <div class="mt-6">
+                        <span class="text-gray-400">أنواع ستصفحها لاحقاً:</span>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">الأقزام</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">العمالقة</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">النجوم النيوترونية</span>
+                            <span class="px-3 py-1 bg-gray-800 rounded-full text-sm">المتغيرات</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="bg-gradient-to-tr from-yellow-900 to-orange-900 p-8 rounded-2xl shadow-xl card-hover">
+                        <div class="flex justify-center mb-6">
+                            <div class="relative w-40 h-40">
+                                <div class="absolute inset-0 bg-yellow-500 rounded-full animate-pulse"></div>
+                                <div class="absolute inset-6 bg-yellow-300 rounded-full"></div>
+                                <div class="absolute inset-12 bg-white rounded-full"></div>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-center">تصنيف النجوم</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <span class="w-4 h-4 bg-blue-400 rounded-full ml-3"></span>
+                                <span><strong>النوع O:</strong> شديدة الحرارة والزرقة</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-4 h-4 bg-yellow-300 rounded-full ml-3"></span>
+                                <span><strong>النوع G:</strong> مثل شمسنا، صفراء</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-4 h-4 bg-orange-500 rounded-full ml-3"></span>
+                                <span><strong>النوع K:</strong> برتقالية، أبرد من الشمس</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="w-4 h-4 bg-red-500 rounded-full ml-3"></span>
+                                <span><strong>النوع M:</strong> حمراء، أبرد النجوم</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- فوتر -->
+    <footer class="gradient-bg py-12 px-6 mt-20">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0 text-center md:text-right">
+                    <h2 class="text-2xl font-bold mb-4">الموسوعة الفلكية الشاملة</h2>
+                    <p class="text-gray-400">نافذتك إلى الكون الواسع</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-xl font-bold mb-4">المواضيع الرئيسية</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="#topics" class="text-gray-400 hover:text-white transition-colors">الثقوب السوداء</a>
+                        <a href="#topics" class="text-gray-400 hover:text-white transition-colors">المجرات</a>
+                        <a href="#topics" class="text-gray-400 hover:text-white transition-colors">الكوكبات</a>
+                        <a href="#topics" class="text-gray-400 hover:text-white transition-colors">النجوم</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 الموسوعة الفلكية الشاملة. جميع الحقوق محفوظة.</p>
+                <p class="mt-2">تصميم وتطوير: فريق علم الفلك</p>
+            </div>
+        </div>
+    </footer>
+
+   
+    <!-- js -->
+     <script src="index.js"></script>
+</body>
+</html>
