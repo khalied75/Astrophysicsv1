@@ -6,8 +6,786 @@
     <title>Astronomy</title>
     <!-- css -->
 
+ <link href="./output.css" rel="stylesheet">
+     <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+        }
+        .astronomy-bg {
+            background-image: url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #4f46e5;
+            bottom: -5px;
+            right: 0;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .coming-soon {
+            position: relative;
+        }
+        .coming-soon::before {
+            content: 'قريباً';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: #f59e0b;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .type-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        .type-card:hover {
+            border-top-color: #4f46e5;
+        }
+        .back-btn {
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+        .star-color-red {
+            color: #ff6b6b;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+        .star-color-orange {
+            color: #ffa726;
+            text-shadow: 0 0 10px rgba(255, 167, 38, 0.5);
+        }
+        .star-color-yellow {
+            color: #ffd54f;
+            text-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
+        }
+        .star-color-blue {
+            color: #42a5f5;
+            text-shadow: 0 0 10px rgba(66, 165, 245, 0.5);
+        }
+        .star-color-white {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-900 text-white">
+       <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <!-- العنوان الرئيسي -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-12 h-12 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-full flex items-center justify-center ml-3">
+                        <span class="text-white text-xl font-bold">⭐</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-2xl md:text-3xl font-bold">الموسوعة الفلكية الشاملة</h1>
+                        <p class="text-gray-300 text-sm md:text-base">رحلة استكشافية في عالم الفلك والفضاء</p>
+                    </div>
+                </div>
+                
+                <!-- زر البحث (للمستقبل) -->
+                <div class="relative">
+                    <input type="text" placeholder="ابحث في الموسوعة..." 
+                           class="bg-gray-800 text-white px-4 py-2 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+                           disabled>
+                    <span class="absolute left-3 top-2.5 text-gray-400 text-xs">قريباً</span>
+                </div>
+            </div>
+            
+            <!-- قائمة التنقل الرئيسية للمستقبل -->
+            <div class="border-t border-gray-700 pt-4">
+                <h3 class="text-lg font-bold text-center mb-4 text-yellow-300">أقسام الموسوعة</h3>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                    <!-- أنواع الثقوب السوداء -->
+                    <a href="blackhole-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg">
+                        أنواع الثقوب السوداء
+                    </a>
+                    
+                    <!-- أنواع المجرات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg coming-soon" onclick="showComingSoon()">
+                        أنواع المجرات
+                    </a>
+                    
+                    <!-- أنواع النجوم -->
+                    <a href="star-types.html" class="nav-link text-white px-3 py-1 text-lg border-b-2 border-yellow-500">
+                        أنواع النجوم
+                    </a>
+                    
+                    <!-- أنواع الكوكبات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg coming-soon" onclick="showComingSoon()">
+                        أنواع الكوكبات
+                    </a>
+                    
+                    <!-- أنواع الكويكبات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg coming-soon" onclick="showComingSoon()">
+                        أنواع الكويكبات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- زر العودة للصفحة الرئيسية -->
+    <div class="container mx-auto py-6 px-6">
+        <a href="index.html" class="back-btn inline-flex items-center text-yellow-400 hover:text-yellow-300">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            العودة للصفحة الرئيسية
+        </a>
+    </div>
+
+    <!-- محتوى صفحة أنواع النجوم -->
+    <main class="container mx-auto py-8 px-6">
+        <!-- عنوان الصفحة -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">أنواع النجوم</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                استكشف عالم النجوم المتنوع: من الأقزام الصغيرة إلى العمالقة الحمر العملاقة، ومن النجوم النيوترونية إلى النجوم المشهورة في سمائنا
+            </p>
+        </div>
+
+        <!-- مقدمة -->
+        <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-2xl mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-300">ما هي النجوم؟</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                النجوم هي أجرام سماوية ضخمة تتكون بشكل رئيسي من الهيدروجين والهيليوم، وتنتج الطاقة من خلال الاندماج النووي في لبها.
+                تختلف النجوم في الحجم، الكتلة، درجة الحرارة، واللون، مما يؤدي إلى أنواع مختلفة لكل منها خصائص فريدة.
+            </p>
+            <p class="text-lg leading-relaxed">
+                تصنف النجوم وفقاً لمخطط هرتزشبرونج-راسل الذي يربط بين لون النجم ودرجة حرارته ولمعانه.
+            </p>
+        </div>
+
+        <!-- أنواع النجوم الرئيسية -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">الأنواع الرئيسية للنجوم</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- النجوم القزمة -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl star-color-yellow">☀️</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">النجوم القزمة</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-yellow-900 text-yellow-300 rounded-full text-sm font-medium">
+                            Dwarf Stars
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        هي النجوم في مرحلة النسق الأساسي من حياتها، حيث تندمج الهيدروجين في لبها لتكوين الهيليوم. 
+                        تشكل حوالي 90% من النجوم في الكون.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full ml-2"></div>
+                            <span class="text-sm">شمسنا نجم قزم أصفر (نوع G)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تتراوح درجات حرارتها بين 2,500 - 50,000 كلفن</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تعيش مليارات السنين</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- العمالقة الحمر -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl star-color-red">🔴</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">العمالقة الحمر</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-red-900 text-red-300 rounded-full text-sm font-medium">
+                            Red Giants
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تتشكل عندما ينفد الهيدروجين في لب النجم القزم، فيتوسع النجم بشكل هائل ويبرد سطحه، 
+                        بينما يصبح لبه أكثر سخونة ويبدأ في اندماج الهيليوم.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">كبيرة جداً (حتى 100 ضعف حجم الشمس)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">درجة حرارة سطحها منخفضة (3,000-4,000 كلفن)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">مرحلة قبل الموت للنجوم المتوسطة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- النجوم النيوترونية -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl star-color-blue">⚡</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">النجوم النيوترونية</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm font-medium">
+                            Neutron Stars
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تتشكل من انهيار لب نجم ضخم (8-25 كتلة شمسية) بعد انفجار سوبرنوفا. 
+                        مادة النجم تتحول بالكامل تقريباً إلى نيوترونات بكثافة هائلة.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">كثيفة جداً (ملعقة صغيرة تزن مليارات الأطنان)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تدور بسرعات هائلة (حتى 700 دورة/ثانية)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تشع نبضات منتظمة (النجوم النابضة)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الأقزام البيض -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-gray-400 to-white rounded-full flex items-center justify-center">
+                            <span class="text-2xl star-color-white">💎</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">الأقزام البيض</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm font-medium">
+                            White Dwarfs
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        المرحلة النهائية للنجوم متوسطة الحجم (مثل شمسنا). بعد مرحلة العملاق الأحمر، 
+                        يطرد النجم طبقاته الخارجية ويكشف عن لب ساخن وكثيف يبرد ببطء على مدى مليارات السنين.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full ml-2"></div>
+                            <span class="text-sm">صغيرة الحجم (بحجم الأرض) لكنها ثقيلة</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full ml-2"></div>
+                            <span class="text-sm">ساخنة جداً في البداية (100,000 كلفن)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full ml-2"></div>
+                            <span class="text-sm">تتكون من مادة متحللة إلكترونياً</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- النجوم الزرقاء العملاقة -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-indigo-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl star-color-blue">🔵</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">النجوم الزرقاء العملاقة</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-blue-800 text-blue-300 rounded-full text-sm font-medium">
+                            Blue Giants
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        نجوم ساخنة جداً وضخمة (10-50 كتلة شمسية)، تحرق وقودها النووي بسرعة كبيرة. 
+                        عمرها قصير نسبياً (بضعة ملايين السنين فقط) وتنتهي بانفجارات سوبرنوفا مذهلة.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full ml-2"></div>
+                            <span class="text-sm">درجة حرارة سطحها 20,000-50,000 كلفن</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full ml-2"></div>
+                            <span class="text-sm">تستهلك وقودها بسرعة شديدة</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full ml-2"></div>
+                            <span class="text-sm">تتحول إلى سوبرنوفا ثم نجوم نيوترونية أو ثقوب سوداء</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- النجوم المتغيرة -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">✨</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">النجوم المتغيرة</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-purple-900 text-purple-300 rounded-full text-sm font-medium">
+                            Variable Stars
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        نجوم يتغير لمعانها مع الزمن بسبب تغيرات داخلية أو خارجية. 
+                        بعضها يتغير بانتظام (كمنارات كونية)، والبعض الآخر يتغير بشكل غير منتظم.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تشمل أنواعاً مثل: Cepheids, RR Lyrae</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تستخدم لقياس المسافات الكونية</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تتغير بسبب النبض أو الانفجارات أو الانكسار</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- النجوم المشهورة -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">نجوم مشهورة في سمائنا</h2>
+            
+            <div class="space-y-8">
+                <!-- نجم سهيل -->
+                <div class="bg-gradient-to-r from-orange-900 to-red-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2 star-color-red">🌟</div>
+                                <h3 class="text-2xl font-bold">سهيل (Canopus)</h3>
+                                <p class="text-gray-300">ألفا القاعدة</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-red-800 text-red-300 rounded-full text-sm font-medium mr-3">
+                                    عملاق ضخم فائق
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-orange-800 text-orange-300 rounded-full text-sm font-medium">
+                                    النوع: F0
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                ثاني ألمع نجم في السماء بعد الشعرى اليمانية. عملاق فائق أبيض-أصفر يبعد حوالي 310 سنة ضوئية. 
+                                كتلته حوالي 8 أضعاف كتلة الشمس، ولمعانه 10,700 ضعف لمعان الشمس.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>310 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان</div>
+                                    <div>10,700 × الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">درجة الحرارة</div>
+                                    <div>7,350 كلفن</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الكتلة</div>
+                                    <div>8 × كتلة الشمس</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الشعرى اليمانية -->
+                <div class="bg-gradient-to-r from-blue-900 to-cyan-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2 star-color-blue">💎</div>
+                                <h3 class="text-2xl font-bold">الشعرى اليمانية (Sirius)</h3>
+                                <p class="text-gray-300">ألفا الكلب الأكبر</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-blue-800 text-blue-300 rounded-full text-sm font-medium mr-3">
+                                    نجم تسلسل رئيسي
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-cyan-800 text-cyan-300 rounded-full text-sm font-medium">
+                                    النظام: ثنائي
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                ألمع نجم في السماء ليلاً. نظام نجمي ثنائي يتكون من الشعرى اليمانية أ (نوع A1) والشعرى اليمانية ب (قزم أبيض).
+                                يبعد حوالي 8.6 سنة ضوئية فقط، مما يجعله أحد أقرب النجوم إلينا.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>8.6 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان</div>
+                                    <div>25 × الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">درجة الحرارة</div>
+                                    <div>9,940 كلفن</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الكتلة</div>
+                                    <div>2 × كتلة الشمس</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- دبران -->
+                <div class="bg-gradient-to-r from-orange-900 to-amber-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2 star-color-orange">🔶</div>
+                                <h3 class="text-2xl font-bold">دبران (Aldebaran)</h3>
+                                <p class="text-gray-300">ألفا الثور</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-orange-800 text-orange-300 rounded-full text-sm font-medium mr-3">
+                                    عملاق برتقالي
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-amber-800 text-amber-300 rounded-full text-sm font-medium">
+                                    النوع: K5
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                عملاق برتقالي وألمع نجم في كوكبة الثور. يبعد حوالي 65 سنة ضوئية. 
+                                قطره حوالي 44 ضعف قطر الشمس، ولمعانه 425 ضعف لمعان الشمس.
+                                لونه برتقالي مائل للحمرة واضح للعيان.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>65 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان</div>
+                                    <div>425 × الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">درجة الحرارة</div>
+                                    <div>3,910 كلفن</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>44 × قطر الشمس</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- آر دبليو سيفي -->
+                <div class="bg-gradient-to-r from-purple-900 to-pink-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">✨</div>
+                                <h3 class="text-2xl font-bold">آر دبليو سيفي (RW Cephei)</h3>
+                                <p class="text-gray-300">نجم متغير</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-purple-800 text-purple-300 rounded-full text-sm font-medium mr-3">
+                                    عملاق ضخم فائق
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-pink-800 text-pink-300 rounded-full text-sm font-medium">
+                                    متغير نصف منتظم
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                واحد من أكبر النجوم المعروفة في الكون. عملاق ضخم فائق أحمر يبعد حوالي 3,500 سنة ضوئية.
+                                حجمه هائل - إذا وضع في مركز نظامنا الشمسي، فسيمتد إلى مدار المشتري.
+                                نجم متغير نصف منتظم، يتغير لمعانه على فترات غير منتظمة.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>~3,500 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان</div>
+                                    <div>350,000-500,000 × الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>~1,000 × قطر الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الفترة المتغيرة</div>
+                                    <div>~70-140 يوم</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- رجل القنطور -->
+                <div class="bg-gradient-to-r from-yellow-900 to-amber-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2 star-color-yellow">☀️</div>
+                                <h3 class="text-2xl font-bold">رجل القنطور (Rigil Kentaurus)</h3>
+                                <p class="text-gray-300">ألفا القنطور</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-yellow-800 text-yellow-300 rounded-full text-sm font-medium mr-3">
+                                    نظام نجمي ثلاثي
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-amber-800 text-amber-300 rounded-full text-sm font-medium">
+                                    أقرب نظام نجمي
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                أقرب نظام نجمي إلى الشمس (4.37 سنة ضوئية). نظام ثلاثي النجوم يتكون من:
+                                1) رجل القنطور أ (شبيه بالشمس، نوع G2) 
+                                2) رجل القنطور ب (برتقالي، نوع K1)
+                                3) بروكسيما القنطور (قزم أحمر، أقرب نجم إلينا).
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>4.37 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان (أ)</div>
+                                    <div>1.5 × الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان (ب)</div>
+                                    <div>0.5 × الشمس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">النوع</div>
+                                    <div>G2V + K1V + M5.5V</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- تصنيف النجوم حسب اللون والحرارة -->
+        <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-2xl mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-center">تصنيف النجوم حسب درجة الحرارة واللون</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-right">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="py-3 px-4">النوع الطيفي</th>
+                            <th class="py-3 px-4">اللون</th>
+                            <th class="py-3 px-4">درجة الحرارة (كلفن)</th>
+                            <th class="py-3 px-4">أمثلة</th>
+                            <th class="py-3 px-4">الخصائص</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-blue">O</td>
+                            <td class="py-3 px-4">أزرق</td>
+                            <td class="py-3 px-4">30,000 - 50,000</td>
+                            <td class="py-3 px-4">النطاق (ζ الجبار)</td>
+                            <td class="py-3 px-4">أسخن النجوم، قصيرة العمر</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-blue">B</td>
+                            <td class="py-3 px-4">أزرق-أبيض</td>
+                            <td class="py-3 px-4">10,000 - 30,000</td>
+                            <td class="py-3 px-4">النجم رجل الجبار</td>
+                            <td class="py-3 px-4">ساخنة، خطوط الهيليوم</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-white">A</td>
+                            <td class="py-3 px-4">أبيض</td>
+                            <td class="py-3 px-4">7,500 - 10,000</td>
+                            <td class="py-3 px-4">الشعرى اليمانية، النسر الواقع</td>
+                            <td class="py-3 px-4">قوية خطوط الهيدروجين</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-yellow">F</td>
+                            <td class="py-3 px-4">أصفر-أبيض</td>
+                            <td class="py-3 px-4">6,000 - 7,500</td>
+                            <td class="py-3 px-4">سهيل (كانوبس)</td>
+                            <td class="py-3 px-4">خطوط المعادن أضعف</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-yellow">G</td>
+                            <td class="py-3 px-4">أصفر</td>
+                            <td class="py-3 px-4">5,200 - 6,000</td>
+                            <td class="py-3 px-4">الشمس، رجل القنطور أ</td>
+                            <td class="py-3 px-4">خطوط المعادن القوية</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-orange">K</td>
+                            <td class="py-3 px-4">برتقالي</td>
+                            <td class="py-3 px-4">3,700 - 5,200</td>
+                            <td class="py-3 px-4">دبران، رجل القنطور ب</td>
+                            <td class="py-3 px-4">أبرد من الشمس، خطوط جزيئية</td>
+                        </tr>
+                        <tr class="border-b border-gray-800">
+                            <td class="py-3 px-4 font-bold star-color-red">M</td>
+                            <td class="py-3 px-4">أحمر</td>
+                            <td class="py-3 px-4">2,400 - 3,700</td>
+                            <td class="py-3 px-4">بروكسيما القنطور، منكب الجوزاء</td>
+                            <td class="py-3 px-4">أبرد النجوم، خطوط أكسيد التيتانيوم</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- معلومات إضافية -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gradient-to-br from-yellow-900 to-orange-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">دورة حياة النجم</h3>
+                <ol class="space-y-3 list-decimal list-inside">
+                    <li>تكوين النجم من السديم (سحابة غاز وغبار)</li>
+                    <li>مرحلة ما قبل النسق الأساسي (التقلص الجذبوي)</li>
+                    <li>النسق الأساسي (اندماج الهيدروجين)</li>
+                    <li>مرحلة العملاق الأحمر (اندماج الهيليوم)</li>
+                    <li>طرد السديم الكوكبي (للنجوم المتوسطة)</li>
+                    <li>مرحلة القزم الأبيض (للنجوم المتوسطة)</li>
+                    <li>انفجار سوبرنوفا (للنجوم الضخمة)</li>
+                    <li>نجم نيوتروني أو ثقب أسود (للنجوم الضخمة)</li>
+                </ol>
+            </div>
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">حقائق عن النجوم</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span>عدد النجوم في الكون المرصود ≈ 200 مليار تريليون نجم</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span>أكبر نجم معروف: UY Scuti (1,700 × قطر الشمس)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span>أصغر نجم معروف: EBLM J0555-57Ab (بحجم زحل)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span>أقدم نجم معروف: HD 140283 (13.7 مليار سنة)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span>70% من النجوم هي أقزام حمراء (نوع M)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="gradient-bg py-12 px-6 mt-20">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0 text-center md:text-right">
+                    <h2 class="text-2xl font-bold mb-4">الموسوعة الفلكية الشاملة</h2>
+                    <p class="text-gray-400">نافذتك إلى الكون الواسع</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-xl font-bold mb-4">استكشف أيضاً</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">الصفحة الرئيسية</a>
+                        <a href="blackhole-types.html" class="text-gray-400 hover:text-white transition-colors">أنواع الثقوب السوداء</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors coming-soon" onclick="showComingSoon()">أنواع المجرات</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 الموسوعة الفلكية الشاملة. جميع الحقوق محفوظة.</p>
+                <p class="mt-2">تصميم وتطوير: فريق علم الفلك</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة التنبيه -->
+    <div id="coming-soon-alert" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-gray-800 p-8 rounded-2xl max-w-md mx-4">
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">قريباً!</h3>
+            <p class="mb-6">هذا القسم قيد التطوير وسيكون متاحاً قريباً. نحن نعمل على إعداد محتوى متكامل لكل نوع من الظواهر الفلكية.</p>
+            <button onclick="closeComingSoon()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium">
+                حسناً
+            </button>
+        </div>
+    </div>
     <!-- scriprt -->
      <script src="index.js"></script>
 </body>
