@@ -1,4 +1,50 @@
-    // تأثيرات للبطاقات عند التمرير
+    // navebar
+    // متغيرات القائمة المتنقلة
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('overlay');
+        
+        // فتح القائمة المتنقلة
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            hamburgerBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // إغلاق القائمة المتنقلة
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        overlay.addEventListener('click', closeMobileMenu);
+        
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // إغلاق القائمة عند تغيير حجم النافذة للشاشات الكبيرة
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                closeMobileMenu();
+            }
+        });
+        
+        // إغلاق القائمة عند الضغط على زر الهروب
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+   
+   
+   // تأثيرات للبطاقات عند التمرير
         const observerOptions = {
             threshold: 0.1
         };
