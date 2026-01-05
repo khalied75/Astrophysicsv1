@@ -1,0 +1,143 @@
+   <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <!-- العنوان الرئيسي -->
+            <div class="flex flex-col md:flex-row justify-center items-center mb-6 md:mb-4">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center ml-3">
+                        <span class="text-white text-xl font-bold">🌌</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-2xl md:text-3xl font-bold">الموسوعة الفلكية الشاملة</h1>
+                        <p class="text-gray-300 text-sm md:text-base">رحلة استكشافية في عالم الفلك والفضاء</p>
+                    </div>
+                </div>
+                
+                 
+            </div>
+            
+            <!-- قائمة التنقل الرئيسية للمستقبل -->
+            <div class="border-t border-gray-700 pt-4">
+                            <h3 class="text-lg font-bold text-center mb-4 text-indigo-300">أقسام الموسوعة</h3>
+
+                <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                    <!-- أنواع الثقوب السوداء -->
+                    
+                    <a href="Blackhol/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg "  >
+                            أنواع الثقوب السوداء 
+                    </a>
+                    <!-- أنواع المجرات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg "  >
+                        أنواع المجرات
+                    </a>
+                    
+                    <!-- أنواع النجوم -->
+                    <a href="star/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع النجوم
+                    </a>
+                    
+                    <!-- أنواع الكوكبات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع الكوكبات
+                    </a>
+                    
+                    <!-- أنواع الكويكبات -->
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-1 text-lg  "  >
+                        أنواع الكويكبات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    new nave bar 
+
+
+
+     <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <!-- الشعار والعنوان -->
+                <div class="logo-container">
+                    <div class="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg font-bold">🌌</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-xl md:text-2xl font-bold">الموسوعة الفلكية</h1>
+                    </div>
+                </div>
+                
+                <!-- زر هامبرجر للجوال -->
+                <div class="lg:hidden">
+                    <div class="hamburger-btn" id="hamburger-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <!-- قائمة التنقل للكمبيوتر -->
+                <div class="hidden lg:flex desktop-nav items-center gap-8">
+                    <a href="index.html" class="nav-link text-white px-3 py-2 text-lg">الرئيسية</a>
+                    <a href="blackhole-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الثقوب السوداء</a>
+                    <a href="galaxy-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع المجرات</a>
+                    <a href="star-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع النجوم</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الكوكبات</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الكويكبات</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة المتنقلة للجوال -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="close-menu " id="close-menu">×</div>
+        
+        <!-- روابط التنقل الرئيسية -->
+        <div class="mt-20">
+            <a href="index.html" class="mobile-nav-link active">
+                <div class="flex items-center">
+                    <span class="ml-3">🏠</span>
+                    <span class="text-lg">الصفحة الرئيسية</span>
+                </div>
+            </a>
+            <a href="blackhole-types.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⚫</span>
+                    <span class="text-lg">أنواع الثقوب السوداء</span>
+                </div>
+            </a>
+            <a href="galaxy-types.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌌</span>
+                    <span class="text-lg">أنواع المجرات</span>
+                </div>
+            </a>
+            <a href="star-types.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⭐</span>
+                    <span class="text-lg">أنواع النجوم</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">✨</span>
+                    <span class="text-lg">أنواع الكوكبات</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌠</span>
+                    <span class="text-lg">أنواع الكويكبات</span>
+                </div>
+            </a>
+        </div>
+        
+        <!-- معلومات الاتصال -->
+        <div class="mt-12 pt-6 border-t border-gray-700">
+            <p class="text-sm text-gray-400 mb-2">الموسوعة الفلكية © 2023</p>
+            <p class="text-xs text-gray-500">نافذتك إلى الكون الواسع</p>
+        </div>
+    </div>

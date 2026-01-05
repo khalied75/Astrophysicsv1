@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomy</title>
+    <!-- css link -->
+      <link href="./output.css" rel="stylesheet">
+      <!-- style -->
+       <style>
+          body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+        }
+        .astronomy-bg {
+            background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #4f46e5;
+            bottom: -5px;
+            right: 0;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+       
+        .type-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        .type-card:hover {
+            border-top-color: #4f46e5;
+        }
+        .back-btn {
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+        .galaxy-image {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        .galaxy-image:hover {
+            transform: scale(1.05);
+        }
+        .hubble-diagram {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hubble-fork {
+            position: relative;
+            height: 300px;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        .fork-line {
+            position: absolute;
+            background: #4f46e5;
+            height: 4px;
+            border-radius: 2px;
+        }
+        .fork-branch {
+            position: absolute;
+            background: #8b5cf6;
+            height: 2px;
+            border-radius: 1px;
+            transform-origin: left center;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #4f46e5;
+            bottom: -5px;
+            right: 0;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* هامبرجر مينو */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+        }
+        @media (max-width: 1024px) {
+            .hamburger-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                padding: 8px;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
+        @media (min-width: 1025px) {
+            .hamburger-menu {
+                display: none !important;
+            }
+            .desktop-nav {
+                display: flex;
+            }
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .close-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        .mobile-nav-link {
+            display: block;
+            padding: 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent;
+        }
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-right-color: #4f46e5;
+            transform: translateX(-5px);
+        }
+        .mobile-nav-link.active {
+            background: rgba(79, 70, 229, 0.2);
+            border-right-color: #4f46e5;
+            color: #a5b4fc;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        .hamburger-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .hamburger-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+       </style>
+</head>
+<body class="bg-gray-900 text-white">
+          <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <!-- الشعار والعنوان -->
+                <div class="logo-container">
+                    <div class="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg font-bold">🌌</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-xl md:text-2xl font-bold">الموسوعة الفلكية</h1>
+                    </div>
+                </div>
+                
+                <!-- زر هامبرجر للجوال -->
+                <div class="lg:hidden">
+                    <div class="hamburger-btn" id="hamburger-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <!-- قائمة التنقل للكمبيوتر -->
+                <div class="hidden lg:flex desktop-nav items-center gap-8">
+                    <a href="../index.html" class="nav-link text-white px-3 py-2 text-lg">الرئيسية</a>
+                    <a href="../Blackhol/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الثقوب السوداء</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع المجرات</a>
+                    <a href="../star/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع النجوم</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الكوكبات</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الكويكبات</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة المتنقلة للجوال -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="close-menu " id="close-menu">×</div>
+        
+        <!-- روابط التنقل الرئيسية -->
+        <div class="mt-20">
+            <a href="../index.html" class="mobile-nav-link active">
+                <div class="flex items-center">
+                    <span class="ml-3">🏠</span>
+                    <span class="text-lg">الصفحة الرئيسية</span>
+                </div>
+            </a>
+            <a href="../Blackhol/index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⚫</span>
+                    <span class="text-lg">أنواع الثقوب السوداء</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌌</span>
+                    <span class="text-lg">أنواع المجرات</span>
+                </div>
+            </a>
+            <a href="../star/index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⭐</span>
+                    <span class="text-lg">أنواع النجوم</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">✨</span>
+                    <span class="text-lg">أنواع الكوكبات</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌠</span>
+                    <span class="text-lg">أنواع الكويكبات</span>
+                </div>
+            </a>
+        </div>
+        
+        <!-- معلومات الاتصال -->
+        <div class="mt-12 pt-6 border-t border-gray-700">
+            <p class="text-sm text-gray-400 mb-2">الموسوعة الفلكية © 2023</p>
+            <p class="text-xs text-gray-500">نافذتك إلى الكون الواسع</p>
+        </div>
+    </div>
+
+    <!-- زر العودة للصفحة الرئيسية -->
+    <div class="container mx-auto py-6 px-6">
+        <a href="../index.html" class="back-btn inline-flex items-center text-blue-400 hover:text-blue-300">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            العودة للصفحة الرئيسية
+        </a>
+    </div>
+
+    <!-- محتوى صفحة أنواع المجرات -->
+    <main class="container mx-auto py-8 px-6">
+        <!-- عنوان الصفحة -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">أنواع المجرات</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                استكشف أنواع المجرات المختلفة وفق تصنيف هابل، من الحلزونية الرائعة إلى الإهليلجية الهائلة، واكتشف أشهر المجرات في الكون
+            </p>
+        </div>
+
+        <!-- تعريف المجرات -->
+        <div class="bg-gradient-to-r from-blue-900 to-purple-900 p-8 rounded-2xl mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-blue-300">ما هي المجرة؟</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                المجرة هي نظام ضخم مترابط بالجاذبية يتكون من النجوم، الغاز، الغبار، والمادة المظلمة. 
+                تعتبر المجرات "جزر كونية" حيث تتجمع فيها النجوم والمادة الكونية.
+            </p>
+            <p class="text-lg leading-relaxed">
+                كل مجرة تحتوي على مادة مظلمة غامضة تشكل حوالي 85% من كتلة المجرة، وتوجد مجرات "شبحية" 
+                تتكون معظمها من المادة المظلمة مع عدد قليل جداً من النجوم.
+            </p>
+        </div>
+
+        <!-- تصنيف هابل -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">تصنيف هابل للمجرات</h2>
+            
+            <div class="hubble-diagram mb-12">
+                <h3 class="text-2xl font-bold mb-6 text-center">مخطط هابل التصنيفي</h3>
+                <div class="hubble-fork">
+                    <!-- الخط الرئيسي -->
+                    <div class="fork-line" style="width: 80%; top: 150px; right: 10%;"></div>
+                    
+                    <!-- فرع الإهليلجية -->
+                    <div class="fork-branch" style="width: 40%; top: 150px; right: 50%; transform: rotate(30deg);"></div>
+                    <div class="absolute" style="top: 100px; right: 20%;">
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-gradient-to-r from-red-600 to-orange-600 rounded-full mx-auto mb-2"></div>
+                            <span class="text-sm">إهليلجية</span>
+                        </div>
+                    </div>
+                    
+                    <!-- فرع الحلزونية العادية -->
+                    <div class="fork-branch" style="width: 40%; top: 150px; right: 50%; transform: rotate(-30deg);"></div>
+                    <div class="absolute" style="top: 200px; right: 20%;">
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                <div class="w-4 h-4 bg-blue-400 rounded-full"></div>
+                            </div>
+                            <span class="text-sm">حلزونية</span>
+                        </div>
+                    </div>
+                    
+                    <!-- فرع الحلزونية القضيبية -->
+                    <div class="fork-branch" style="width: 40%; top: 150px; right: 50%; transform: rotate(-60deg);"></div>
+                    <div class="absolute" style="top: 250px; right: 20%;">
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                <div class="w-6 h-2 bg-purple-400 rounded"></div>
+                            </div>
+                            <span class="text-sm">حلزونية قضيبية</span>
+                        </div>
+                    </div>
+                    
+                    <!-- المجرات غير المنتظمة -->
+                    <div class="absolute" style="top: 150px; right: 5%;">
+                        <div class="text-center">
+                            <div class="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                <div class="w-4 h-4 bg-gray-300 rounded-full" style="margin-right: 8px;"></div>
+                                <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                            </div>
+                            <span class="text-sm">غير منتظمة</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-gray-300">
+                    طور إدوين هابل هذا التصنيف عام 1926، ورتب المجرات حسب شكلها إلى ثلاثة أنواع رئيسية
+                </p>
+            </div>
+
+            <!-- أنواع المجرات حسب تصنيف هابل -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- المجرات الإهليلجية -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🔴</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">المجرات الإهليلجية</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-red-900 text-red-300 rounded-full text-sm font-medium">
+                            Type E
+                        </span>
+                    </div>
+                    <img src="../img/7d740176d21047f5437acde47fa0e428 (1).gif" 
+                         alt="مجرة إهليلجية" 
+                         class="galaxy-image w-full mb-4"
+                         onerror="this.src='https://via.placeholder.com/800x400/991b1b/ffffff?text=Elliptical+Galaxy'">
+                    <p class="text-gray-300 mb-4">
+                        شكلها بيضوي أو كروي، تتراوح من كروية (E0) إلى بيضوية طويلة (E7). 
+                        تحتوي على نجوم قديمة بشكل رئيسي وقليل من الغاز والغبار، مما يحد من تشكل نجوم جديدة.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">أكبر المجرات حجماً (مجرات هائلة)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">دورانها بطيء أو معدوم</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تنشأ من اندماج مجرات أصغر</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المجرات الحلزونية -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🌀</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">المجرات الحلزونية</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm font-medium">
+                            Type S
+                        </span>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/M101_hires_STScI-PRC2006-10a.jpg/800px-M101_hires_STScI-PRC2006-10a.jpg" 
+                         alt="مجرة حلزونية" 
+                         class="galaxy-image w-full mb-4"
+                         onerror="this.src='https://via.placeholder.com/800x400/1e40af/ffffff?text=Spiral+Galaxy'">
+                    <p class="text-gray-300 mb-4">
+                        لها نواة مركزية كروية وأذرع حلزونية تحتوي على نجوم شابة وزرقاء، غاز، وغبار.
+                        تصنف من Sa (أذرع ضيقة، نواة كبيرة) إلى Sc (أذرع واسعة، نواة صغيرة).
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تتشكل فيها نجوم جديدة باستمرار</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تدور بسرعة حول مركزها</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تحتوي على ثقب أسود هائل في المركز</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المجرات الحلزونية القضيبية -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">المجرات الحلزونية القضيبية</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-purple-900 text-purple-300 rounded-full text-sm font-medium">
+                            Type SB
+                        </span>
+                    </div>
+                    <img src="../img/Hubble2005-01-barred-spiral-galaxy-NGC1300.jpg" 
+                         alt="مجرة حلزونية قضيبية" 
+                         class="galaxy-image w-full mb-4"
+                         onerror="this.src='https://via.placeholder.com/800x400/7c3aed/ffffff?text=Barred+Spiral+Galaxy'">
+                    <p class="text-gray-300 mb-4">
+                        تشبه المجرات الحلزونية ولكن لها قضيب مركزي من النجوم يمر عبر النواة،
+                        وتخرج الأذرع الحلزونية من نهايات هذا القضيب. تصنف من SBa إلى SBc.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">معظم المجرات الحلزونية لها قضيب</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">القضيب ينقل الغاز نحو المركز</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">قد يكون القضيب مؤقتاً في حياة المجرة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المجرات غير المنتظمة -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🌫️</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">المجرات غير المنتظمة</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm font-medium">
+                            Type Irr
+                        </span>
+                    </div>
+                    <img src="../img/images (1).jpg" 
+                         alt="مجرة غير منتظمة" 
+                         class="galaxy-image w-full mb-4"
+                         onerror="this.src='https://via.placeholder.com/800x400/4b5563/ffffff?text=Irregular+Galaxy'">
+                    <p class="text-gray-300 mb-4">
+                        ليس لها شكل محدد ولا تركيب منتظم. غالباً ما تكون نتيجة تفاعلات جاذبية مع مجرات أخرى،
+                        أو مجرات صغيرة لم تستقر بعد في شكل منتظم.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gray-500 rounded-full ml-2"></div>
+                            <span class="text-sm">غنية بالغاز وتتشكل فيها نجوم جديدة</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gray-500 rounded-full ml-2"></div>
+                            <span class="text-sm">غالباً ما تكون صغيرة الحجم</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gray-500 rounded-full ml-2"></div>
+                            <span class="text-sm">شائعة في الكون المبكر</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المجرات العدسية -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🔍</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">المجرات العدسية</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-green-900 text-green-300 rounded-full text-sm font-medium">
+                            Type S0
+                        </span>
+                    </div>
+                    <img src="../img/images.jpg" 
+                         alt="مجرة عدسية" 
+                         class="galaxy-image w-full mb-4"
+                         onerror="this.src='https://via.placeholder.com/800x400/065f46/ffffff?text=Lenticular+Galaxy'">
+                    <p class="text-gray-300 mb-4">
+                        وسيطة بين الإهليلجية والحلزونية. لها قرص كالمجرات الحلزونية ولكن بدون أذرع واضحة،
+                        ونواة كالمجرات الإهليلجية. غالباً ما تكون قد استهلكت معظم غازها.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
+                            <span class="text-sm">قليل من النجوم الجديدة تتشكل فيها</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
+                            <span class="text-sm">شائعة في العناقيد المجرية</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
+                            <span class="text-sm">قد تكون مجرات حلزونية استهلكت غازها</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المجرات الشبحية -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">👻</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">المجرات الشبحية</h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-indigo-900 text-indigo-300 rounded-full text-sm font-medium">
+                            Dark Matter Galaxies
+                        </span>
+                    </div>
+                    <img src="../img/Satellite-Galaxies-1752518458.webp" 
+                         alt="مجرة شبحية" 
+                         class="galaxy-image w-full mb-4"
+                         onerror="this.src='https://via.placeholder.com/800x400/3730a3/ffffff?text=Ghost+Galaxy'">
+                    <p class="text-gray-300 mb-4">
+                        مجرات فائقة الخفة تتكون معظمها من المادة المظلمة، مع عدد قليل جداً من النجوم.
+                        اكتشفت حديثاً وتشكل تحدياً لفهمنا لتشكل المجرات وتطورها.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full ml-2"></div>
+                            <span class="text-sm">99.99% من كتلتها مادة مظلمة</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full ml-2"></div>
+                            <span class="text-sm">خافتة جداً يصعب رصدها</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full ml-2"></div>
+                            <span class="text-sm">قد تكون الأكثر شيوعاً في الكون</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- مجرات مشهورة -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">مجرة مشهورة في الكون</h2>
+            
+            <div class="space-y-8">
+                <!-- مجرة درب التبانة -->
+                <div class="bg-gradient-to-r from-blue-900 to-cyan-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🌌</div>
+                                <h3 class="text-2xl font-bold">درب التبانة</h3>
+                                <p class="text-gray-300">مجرة درب التبانة</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-blue-800 text-blue-300 rounded-full text-sm font-medium mr-3">
+                                    حلزونية قضيبية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-cyan-800 text-cyan-300 rounded-full text-sm font-medium">
+                                    SBbc
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                مجرتنا الأم، تحتوي على 100-400 مليار نجم. قطرها حوالي 100,000 سنة ضوئية،
+                                وسمكها حوالي 1,000 سنة ضوئية. تحتوي على ثقب أسود هائل في مركزها اسمه "القوس A*".
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>100,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">عدد النجوم</div>
+                                    <div>100-400 مليار</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد عن المركز</div>
+                                    <div>26,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">العمر</div>
+                                    <div>~13.6 مليار سنة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مجرة المرأة المسلسلة (M31) -->
+                <div class="bg-gradient-to-r from-purple-900 to-pink-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🌀</div>
+                                <h3 class="text-2xl font-bold">المرأة المسلسلة (M31)</h3>
+                                <p class="text-gray-300">أندروميدا</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-purple-800 text-purple-300 rounded-full text-sm font-medium mr-3">
+                                    حلزونية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-pink-800 text-pink-300 rounded-full text-sm font-medium">
+                                    SA(s)b
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                أقرب مجرة حلزونية كبرى إلينا، تبعد 2.5 مليون سنة ضوئية. أكبر من مجرتنا،
+                                تحتوي على تريليون نجم. تتحرك نحو مجرتنا وسوف تندمج معها بعد حوالي 4.5 مليار سنة.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>2.5 مليون سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>220,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">عدد النجوم</div>
+                                    <div>~1 تريليون</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان</div>
+                                    <div>2.6 × درب التبانة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مجرة السلسلة (M51) -->
+                <div class="bg-gradient-to-r from-blue-900 to-indigo-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🌀</div>
+                                <h3 class="text-2xl font-bold">مجرة السلسلة (M51)</h3>
+                                <p class="text-gray-300">Whirlpool Galaxy</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-blue-800 text-blue-300 rounded-full text-sm font-medium mr-3">
+                                    حلزونية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-indigo-800 text-indigo-300 rounded-full text-sm font-medium">
+                                    SA(s)bc
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                مجرة حلزونية كلاسيكية ذات أذرع واضحة جداً. تتفاعل مع مجرة أصغر (NGC 5195).
+                                تبعد 23 مليون سنة ضوئية وتعد من أجمل المجرات في السماء.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>23 مليون سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>60,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">التصنيف</div>
+                                    <div>حلزونية كلاسيكية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الأهمية</div>
+                                    <div>أول مجرة حلزونية معروفة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مجرة القبعة (M104) -->
+                <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🎩</div>
+                                <h3 class="text-2xl font-bold">مجرة القبعة (M104)</h3>
+                                <p class="text-gray-300">Sombrero Galaxy</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm font-medium mr-3">
+                                    حلزونية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-gray-600 text-gray-200 rounded-full text-sm font-medium">
+                                    SA(s)a
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                مجرة حلزونية ذات انتفاخ مركزي كبير جداً وحلقة غبارية واضحة تبدو كالقبعة.
+                                تبعد 29 مليون سنة ضوئية وتحتوي على ثقب أسود هائل في مركزها.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>29 مليون سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>50,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">كتلة الثقب الأسود</div>
+                                    <div>~1 مليار كتلة شمسية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الملامح</div>
+                                    <div>حلقة غبارية واضحة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مجرة M87 -->
+                <div class="bg-gradient-to-r from-red-900 to-orange-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">⚫</div>
+                                <h3 class="text-2xl font-bold">مجرة M87</h3>
+                                <p class="text-gray-300">Virgo A</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-red-800 text-red-300 rounded-full text-sm font-medium mr-3">
+                                    إهليلجية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-orange-800 text-orange-300 rounded-full text-sm font-medium">
+                                    E+0-1 pec
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                مجرة إهليلجية هائلة في مركز عنقود العذراء. تحتوي على ثقب أسود هائل (M87*)
+                                تم تصويره مباشرة لأول مرة في 2019. تطلق نفاثات بلازما بطول 5,000 سنة ضوئية.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>53 مليون سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">كتلة الثقب الأسود</div>
+                                    <div>6.5 مليار كتلة شمسية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">النفاثات</div>
+                                    <div>5,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">التاريخ</div>
+                                    <div>أول ثقب أسود يُصوّر</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مجرة NGC 1101 -->
+                <div class="bg-gradient-to-r from-green-900 to-emerald-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🔭</div>
+                                <h3 class="text-2xl font-bold">مجرة NGC 1101</h3>
+                                <p class="text-gray-300">مجرة مشهورة</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-green-800 text-green-300 rounded-full text-sm font-medium mr-3">
+                                    حلزونية قضيبية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-emerald-800 text-emerald-300 rounded-full text-sm font-medium">
+                                    SBbc
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                مجرة حلزونية قضيبية تبعد حوالي 240 مليون سنة ضوئية. قضيبها المركزي واضح جداً
+                                وأذرعها الحلزونية تحتوي على مناطق نشطة لتشكل النجوم.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>240 مليون سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>~130,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الكوكبة</div>
+                                    <div>قيطس</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">اللمعان</div>
+                                    <div>قريب من مجرتنا</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مجرة تلمراءه السلسله -->
+                <div class="bg-gradient-to-r from-yellow-900 to-amber-900 p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="md:w-1/4">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">🌟</div>
+                                <h3 class="text-2xl font-bold">مجرة تلمراءه السلسله</h3>
+                                <p class="text-gray-300">Triangulum Galaxy</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4">
+                            <div class="mb-4">
+                                <span class="inline-block px-3 py-1 bg-yellow-800 text-yellow-300 rounded-full text-sm font-medium mr-3">
+                                    حلزونية
+                                </span>
+                                <span class="inline-block px-3 py-1 bg-amber-800 text-amber-300 rounded-full text-sm font-medium">
+                                    SA(s)cd
+                                </span>
+                            </div>
+                            <p class="text-gray-300 mb-3">
+                                ثالث أكبر مجرة في المجموعة المحلية بعد أندروميدا ودرب التبانة. 
+                                تبعد 2.7 مليون سنة ضوئية وهي أصغر من مجرتنا لكنها أكثر نشاطاً في تشكل النجوم.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">البعد</div>
+                                    <div>2.7 مليون سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">القطر</div>
+                                    <div>60,000 سنة ضوئية</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">عدد النجوم</div>
+                                    <div>~40 مليار</div>
+                                </div>
+                                <div class="bg-gray-800 p-3 rounded-lg">
+                                    <div class="font-bold">الأهمية</div>
+                                    <div>أصغر في المجموعة المحلية</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- معلومات إضافية -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gradient-to-br from-blue-900 to-purple-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">حقائق عن المجرات</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-blue-300 ml-2">•</span>
+                        <span>يوجد حوالي 2 تريليون مجرة في الكون المرصود</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-300 ml-2">•</span>
+                        <span>أصغر المجرات تحتوي على 10 ملايين نجم فقط</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-300 ml-2">•</span>
+                        <span>أكبر المجرات تحتوي على 100 تريليون نجم</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-300 ml-2">•</span>
+                        <span>85% من كتلة المجرة مادة مظلمة غير مرئية</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-300 ml-2">•</span>
+                        <span>المجرات تتحرك مبتعدة عن بعضها (توسع الكون)</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">تطور المجرات</h3>
+                <ol class="space-y-3 list-decimal list-inside">
+                    <li>تشكل من سحب عملاقة من الهيدروجين والهيليوم</li>
+                    <li>انهيار الجاذبية وتشكل النجوم الأولى</li>
+                    <li>تجمع المجرات الصغيرة في مجرات أكبر</li>
+                    <li>تطور الأشكال (من غير منتظمة إلى حلزونية)</li>
+                    <li>تفاعلات واصطدامات مع مجرات أخرى</li>
+                    <li>استهلاك الغاز وتوقف تشكل النجوم</li>
+                    <li>تحول إلى مجرات إهليلجية قديمة</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="gradient-bg py-12 px-6 mt-20">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0 text-center md:text-right">
+                    <h2 class="text-2xl font-bold mb-4">الموسوعة الفلكية الشاملة</h2>
+                    <p class="text-gray-400">نافذتك إلى الكون الواسع</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-xl font-bold mb-4">استكشف أيضاً</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="../index.html" class="text-gray-400 hover:text-white transition-colors">الصفحة الرئيسية</a>
+                        <a href="../Blackhol/index.html" class="text-gray-400 hover:text-white transition-colors">أنواع الثقوب السوداء</a>
+                        <a href="../star/index.html" class="text-gray-400 hover:text-white transition-colors">أنواع النجوم</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 الموسوعة الفلكية الشاملة. جميع الحقوق محفوظة.</p>
+                <p class="mt-2">تصميم وتطوير: خالد الزعبي</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- نافذة التنبيه -->
+   
+
+    <!-- js -->
+     <script src="index.js"></script>
+</body>
+</html>
