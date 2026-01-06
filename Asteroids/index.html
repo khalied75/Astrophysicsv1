@@ -1,14 +1,955 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astronomyt</title>
     <!-- css -->
      <link href="./output.css" rel="stylesheet">
+     <!-- style -->
+        <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        /* nave bar  */
+          body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #4f46e5;
+            bottom: -5px;
+            right: 0;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* هامبرجر مينو */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+        }
+        @media (max-width: 1024px) {
+            .hamburger-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                padding: 8px;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
+        @media (min-width: 1025px) {
+            .hamburger-menu {
+                display: none !important;
+            }
+            .desktop-nav {
+                display: flex;
+            }
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .close-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        .mobile-nav-link {
+            display: block;
+            padding: 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent;
+        }
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-right-color: #4f46e5;
+            transform: translateX(-5px);
+        }
+        .mobile-nav-link.active {
+            background: rgba(79, 70, 229, 0.2);
+            border-right-color: #4f46e5;
+            color: #a5b4fc;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        .hamburger-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .hamburger-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        .asteroid-bg {
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .space-bg {
+            background: radial-gradient(ellipse at center, #1e3a8a 0%, #0f172a 70%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+        .type-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        .type-card:hover {
+            border-top-color: #f59e0b;
+        }
+        .asteroid-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .belt-diagram {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .sun {
+            position: absolute;
+            left: 15%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #fbbf24, #d97706);
+            border-radius: 50%;
+            box-shadow: 0 0 50px #f59e0b;
+            z-index: 2;
+        }
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--color1), var(--color2));
+        }
+        .mars {
+            left: 35%;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            --color1: #dc2626;
+            --color2: #991b1b;
+            transform: translate(-50%, -50%);
+        }
+        .jupiter {
+            left: 55%;
+            top: 50%;
+            width: 50px;
+            height: 50px;
+            --color1: #fbbf24;
+            --color2: #d97706;
+            transform: translate(-50%, -50%);
+        }
+        .asteroid-belt {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300px;
+            height: 150px;
+            border: 2px dashed rgba(245, 158, 11, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(20deg);
+        }
+        .asteroid {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: orbit 20s linear infinite;
+        }
+        .asteroid:nth-child(1) { animation-delay: 0s; left: 30%; top: 40%; }
+        .asteroid:nth-child(2) { animation-delay: -2s; left: 45%; top: 35%; }
+        .asteroid:nth-child(3) { animation-delay: -4s; left: 60%; top: 45%; }
+        .asteroid:nth-child(4) { animation-delay: -6s; left: 40%; top: 60%; }
+        .asteroid:nth-child(5) { animation-delay: -8s; left: 55%; top: 55%; }
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5),
+                         0 0 20px rgba(245, 158, 11, 0.3),
+                         0 0 30px rgba(245, 158, 11, 0.2);
+        }
+        .info-panel {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        .timeline {
+            position: relative;
+            padding-right: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #f59e0b, #d97706);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -36px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #f59e0b;
+            border: 3px solid #0f172a;
+        }
+    </style>
 </head>
 <body>
+          <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <!-- الشعار والعنوان -->
+                <div class="logo-container">
+                    <div class="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg font-bold">🌌</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-xl md:text-2xl font-bold">الموسوعة الفلكية</h1>
+                    </div>
+                </div>
+                
+                <!-- زر هامبرجر للجوال -->
+                <div class="lg:hidden">
+                    <div class="hamburger-btn" id="hamburger-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <!-- قائمة التنقل للكمبيوتر -->
+                <div class="hidden lg:flex desktop-nav items-center gap-8">
+                    <a href="../index.html" class="nav-link text-white px-3 py-2 text-lg">الرئيسية</a>
+                    <a href="../Blackhol/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الثقوب السوداء</a>
+                    <a href="../Galaxy/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع المجرات</a>
+                    <a href="../star/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع النجوم</a>
+                    <a href="../Asterisms/index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الكوكبات</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">أنواع الكويكبات</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
+    <!-- القائمة المتنقلة للجوال -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="close-menu " id="close-menu">×</div>
+        
+        <!-- روابط التنقل الرئيسية -->
+        <div class="mt-20">
+            <a href="../index.html" class="mobile-nav-link active">
+                <div class="flex items-center">
+                    <span class="ml-3">🏠</span>
+                    <span class="text-lg">الصفحة الرئيسية</span>
+                </div>
+            </a>
+            <a href="../Blackhol/index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⚫</span>
+                    <span class="text-lg">أنواع الثقوب السوداء</span>
+                </div>
+            </a>
+            <a href="../Galaxy/index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌌</span>
+                    <span class="text-lg">أنواع المجرات</span>
+                </div>
+            </a>
+            <a href="../star/index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⭐</span>
+                    <span class="text-lg">أنواع النجوم</span>
+                </div>
+            </a>
+            <a href="../Asterisms/index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">✨</span>
+                    <span class="text-lg">أنواع الكوكبات</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌠</span>
+                    <span class="text-lg">أنواع الكويكبات</span>
+                </div>
+            </a>
+        </div>
+        
+        <!-- معلومات الاتصال -->
+        <div class="mt-12 pt-6 border-t border-gray-700">
+            <p class="text-sm text-gray-400 mb-2">الموسوعة الفلكية © 2025</p>
+            <p class="text-xs text-gray-500">نافذتك إلى الكون الواسع</p>
+        </div>
+    </div>
+ <header class="relative asteroid-bg py-24 px-6 overflow-hidden">
+    
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+        
+        <!-- كويكبات متحركة في الخلفية -->
+        <div class="absolute inset-0">
+            <div class="asteroid" style="top: 20%; right: 10%; animation-delay: 0s;"></div>
+            <div class="asteroid" style="top: 40%; right: 30%; animation-delay: -3s;"></div>
+            <div class="asteroid" style="top: 60%; right: 20%; animation-delay: -5s;"></div>
+            <div class="asteroid" style="top: 30%; right: 40%; animation-delay: -7s;"></div>
+            <div class="asteroid" style="top: 70%; right: 50%; animation-delay: -9s;"></div>
+        </div>
+        
+        <div class="container mx-auto relative z-10">
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 bg-gradient-to-r from-amber-900 to-yellow-900 rounded-full mb-6">
+                    <span class="text-4xl">🌠</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 glow-text">الكويكبات</h1>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-amber-100">
+                    بقايا النظام الشمسي البدائي بين المريخ والمشتري
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="info-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl mb-3">🚀</div>
+                    <h3 class="text-xl font-bold mb-2">الحزام الكويكبي</h3>
+                    <p class="text-amber-200">منطقة بين المريخ والمشتري</p>
+                </div>
+                <div class="info-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl mb-3">💎</div>
+                    <h3 class="text-xl font-bold mb-2">ملايين الأجرام</h3>
+                    <p class="text-amber-200">بأحجام وأشكال مختلفة</p>
+                </div>
+                <div class="info-panel p-6 rounded-2xl text-center">
+                    <div class="text-3xl mb-3">🕰️</div>
+                    <h3 class="text-xl font-bold mb-2">بقايا التكوين</h3>
+                    <p class="text-amber-200">منذ 4.6 مليار سنة</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container mx-auto py-12 px-6">
+        <!-- حزام الكويكبات -->
+        <section class="mb-20">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8 text-center">حزام الكويكبات الرئيسي</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center mb-12">
+                <div>
+                    <p class="text-lg leading-relaxed mb-6">
+                        الحزام الكويكبي الرئيسي هو منطقة على شكل قرص تقع بين كوكبي المريخ والمشتري، 
+                        تحتوي على ملايين الأجرام الصخرية التي لم تتجمع لتشكل كوكباً.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-6">
+                        تشكلت هذه الكويكبات من بقايا السديم الشمسي البدائي بعد تشكل النظام الشمسي 
+                        منذ حوالي 4.6 مليار سنة. جاذبية المشتري الهائلة منعت هذه المواد من التجمع.
+                    </p>
+                    <div class="bg-gradient-to-r from-amber-900 to-yellow-900 p-6 rounded-xl">
+                        <h4 class="text-xl font-bold mb-3">حقائق سريعة</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <span class="text-amber-300 ml-2">•</span>
+                                <span>يقع بين 2.1 و3.3 وحدة فلكية من الشمس</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-amber-300 ml-2">•</span>
+                                <span>يحتوي على أكثر من 1.2 مليون كويكب معروف</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-amber-300 ml-2">•</span>
+                                <span>الكتلة الإجمالية: 4% فقط من كتلة القمر</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-amber-300 ml-2">•</span>
+                                <span>المسافة بين الكويكبات كبيرة جداً (ملايين الكيلومترات)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- رسم توضيحي للحزام -->
+                <div class="belt-diagram">
+                    <div class="sun"></div>
+                    <div class="planet mars"></div>
+                    <div class="asteroid-belt"></div>
+                    <div class="planet jupiter"></div>
+                    <div class="asteroid"></div>
+                    <div class="asteroid"></div>
+                    <div class="asteroid"></div>
+                    <div class="asteroid"></div>
+                    <div class="asteroid"></div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 text-center text-sm text-gray-400">
+                        <div class="flex justify-between px-4">
+                            <span>المريخ</span>
+                            <span class="text-amber-400">حزام الكويكبات</span>
+                            <span>المشتري</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- أنواع الكويكبات -->
+        <section class="mb-20">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8 text-center">أنواع الكويكبات</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <!-- الكويكبات الكربونية -->
+                <div class="type-card info-panel p-6 rounded-2xl">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-r from-gray-700 to-gray-900 rounded-full flex items-center justify-center asteroid-icon">
+                            <span class="text-3xl">🪨</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-gray-300">الكويكبات الكربونية<br><span class="text-sm">(النوع C)</span></h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm">
+                            75% من الكويكبات
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تتكون من الطين والصخور السيليكاتية، وتشبه النيازك الكوندريت الكربونية.
+                        هي الأكثر شيوعاً في الحزام الخارجي.
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-gray-500 rounded-full ml-2"></span>
+                            <span>غنية بالكربون والمركبات العضوية</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-gray-500 rounded-full ml-2"></span>
+                            <span>داكنة اللون (انعكاس ضعيف)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-gray-500 rounded-full ml-2"></span>
+                            <span>قد تحمل مواد عضوية للحياة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الكويكبات السيليكاتية -->
+                <div class="type-card info-panel p-6 rounded-2xl">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-r from-stone-600 to-stone-800 rounded-full flex items-center justify-center asteroid-icon">
+                            <span class="text-3xl">🪨</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-stone-300">الكويكبات السيليكاتية<br><span class="text-sm">(النوع S)</span></h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-stone-800 text-stone-300 rounded-full text-sm">
+                            17% من الكويكبات
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تتكون من مواد صخرية-معدنية، بشكل رئيسي السيليكات مع بعض النيكل والحديد.
+                        توجد في الحزام الداخلي.
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-stone-500 rounded-full ml-2"></span>
+                            <span>ساطعة نسبياً</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-stone-500 rounded-full ml-2"></span>
+                            <span>تتكون من السيليكات والنيكل والحديد</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-stone-500 rounded-full ml-2"></span>
+                            <span>تشبه نيازك الحجر والحديد</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الكويكبات المعدنية -->
+                <div class="type-card info-panel p-6 rounded-2xl">
+                    <div class="flex justify-center mb-4">
+                        <div class="w-20 h-20 bg-gradient-to-r from-amber-700 to-yellow-900 rounded-full flex items-center justify-center asteroid-icon">
+                            <span class="text-3xl">💎</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center text-amber-300">الكويكبات المعدنية<br><span class="text-sm">(النوع M)</span></h3>
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-amber-900 text-amber-300 rounded-full text-sm">
+                            8% من الكويكبات
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تتكون بشكل رئيسي من النيكل والحديد، وهي بقايا لب الكويكبات الأكبر التي تحطمت.
+                        تشكل كويكبات غنية بالمعادن.
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-amber-500 rounded-full ml-2"></span>
+                            <span>غنية بالمعادن الثمينة</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-amber-500 rounded-full ml-2"></span>
+                            <span>مصدر محتمل للموارد الفضائية</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 bg-amber-500 rounded-full ml-2"></span>
+                            <span>توجد في منتصف الحزام</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- نشأة الكويكبات -->
+        <section class="mb-20">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8 text-center">نشأة الكويكبات</h2>
+            
+            <div class="timeline max-w-3xl mx-auto">
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold mb-2">قبل 4.6 مليار سنة</h3>
+                    <p class="text-gray-300">
+                        تشكل السديم الشمسي البدائي من غاز وغبار. بدأت الجسيمات الصغيرة في التصاق ببعضها.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold mb-2">المرحلة الكوكبية الأولى</h3>
+                    <p class="text-gray-300">
+                        تكوين الكواكب الصغيرة (الكويكبات الأولية) من تصادم جسيمات الغبار.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold mb-2">تأثير المشتري</h3>
+                    <p class="text-gray-300">
+                        جاذبية المشتري الهائلة تخلق اضطرابات جاذبية تمنع الكويكبات من التجمع.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold mb-2">التصادمات والتفتت</h3>
+                    <p class="text-gray-300">
+                        تصادم الكويكبات الكبيرة مع بعضها ينتج عنها الكويكبات الأصغر التي نراها اليوم.
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold mb-2">الحزام الحديث</h3>
+                    <p class="text-gray-300">
+                        استقرار الحزام الكويكبي في شكله الحالي بين المريخ والمشتري.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="info-panel p-8 rounded-2xl mt-8">
+                <h3 class="text-2xl font-bold mb-4 text-amber-300">لماذا لم يتكون كوكب؟</h3>
+                <p class="text-lg leading-relaxed mb-4">
+                    هناك عدة نظريات تفسر لماذا لم تتجمع الكويكبات لتشكل كوكباً:
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-amber-300 ml-2">•</span>
+                        <span><strong>تأثير المشتري:</strong> جاذبيته تخلق اضطرابات تمنع التراكم</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-amber-300 ml-2">•</span>
+                        <span><strong>الطاقة المدارية:</strong> سرعات الكويكبات العالية تجعل التصادمات عنيفة وتفتتية</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-amber-300 ml-2">•</span>
+                        <span><strong>نقص الكتلة:</strong> الكتلة الإجمالية قليلة جداً (فقط 4% من كتلة القمر)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-amber-300 ml-2">•</span>
+                        <span><strong>التناثر:</strong> المسافات الكبيرة بين الكويكبات تمنع جاذبيتها من جمعها</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- كويكبات مشهورة -->
+        <section class="mb-20">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8 text-center">كويكبات مشهورة</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- سيريس -->
+                <div class="info-panel p-6 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-2xl">🪐</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">سيريس (Ceres)</h3>
+                            <p class="text-gray-400">الكوكب القزم</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        أكبر جسم في حزام الكويكبات، يُصنف الآن ككوكب قزم. قطره 940 كم، 
+                        ويمثل ثلث كتلة الحزام الكويكبي بأكمله.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">القطر</div>
+                            <div>940 كم</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">الكتلة</div>
+                            <div>33% من الحزام</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">المسافة من الشمس</div>
+                            <div>2.8 وحدة فلكية</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">الفترة المدارية</div>
+                            <div>4.6 سنوات</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فيستا -->
+                <div class="info-panel p-6 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-2xl">💫</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">فيسـتا (Vesta)</h3>
+                            <p class="text-gray-400">ثاني أكبر كويكب</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        ثاني أكبر كويكب في الحزام، وواحد من أكثر الكويكبات سطوعاً. 
+                        له نواة معدنية مميزة وقشرة بازلتية.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">القطر</div>
+                            <div>525 كم</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">الكتلة</div>
+                            <div>9% من الحزام</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">النوع</div>
+                            <div>V (بازلتي)</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">المميزات</div>
+                            <div>نواة معدنية</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بallas -->
+                <div class="info-panel p-6 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-2xl">⭐</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">بالاس (Pallas)</h3>
+                            <p class="text-gray-400">ثالث أكبر كويكب</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        ثالث أكبر كويكب، له مدار مائل بشكل غير عادي. يشبه فيستا في التركيب 
+                        لكن مداره مختلف جداً.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">القطر</div>
+                            <div>512 كم</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">الميل المداري</div>
+                            <div>34.8 درجة</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">النوع</div>
+                            <div>B (كربوني)</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">المميزات</div>
+                            <div>مدار شديد الميلان</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- هايجيا -->
+                <div class="info-panel p-6 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-2xl">🔴</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">هايجيا (Hygiea)</h3>
+                            <p class="text-gray-400">رابع أكبر كويكب</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        رابع أكبر كويكب في الحزام الرئيسي، وشكلها شبه كروي مما يجعلها مرشحة 
+                        لتصنيف كوكب قزم.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">القطر</div>
+                            <div>430 كم</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">الشكل</div>
+                            <div>شبه كروي</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">النوع</div>
+                            <div>C (كربوني)</div>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg">
+                            <div class="font-bold">المميزات</div>
+                            <div>مرشح لكوكب قزم</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- أهمية الكويكبات -->
+        <section class="mb-20">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8 text-center">أهمية الكويكبات العلمية</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="info-panel p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4 text-cyan-300">نافذة على الماضي</h3>
+                    <p class="text-gray-300 mb-4">
+                        الكويكبات هي كبسولات زمنية تحفظ تاريخ النظام الشمسي منذ تشكله.
+                        دراستها تساعدنا على فهم:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="text-cyan-300 ml-2">•</span>
+                            <span>ظروف تشكل النظام الشمسي</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-cyan-300 ml-2">•</span>
+                            <span>توزيع المواد في السديم الشمسي</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-cyan-300 ml-2">•</span>
+                            <span>عمليات التمايز الكوكبي</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-cyan-300 ml-2">•</span>
+                            <span>أصل المياه والمواد العضوية على الأرض</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="info-panel p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4 text-amber-300">المستقبل والاستكشاف</h3>
+                    <p class="text-gray-300 mb-4">
+                        الكويكبات تقدم فرصاً فريدة للاستكشاف والاستفادة المستقبلية:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <span class="text-amber-300 ml-2">•</span>
+                            <span>التعدين الفضائي للموارد المعدنية</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-amber-300 ml-2">•</span>
+                            <span>محطات وقود للرحلات الفضائية البعيدة</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-amber-300 ml-2">•</span>
+                            <span>دراسة طرق حماية الأرض من الاصطدامات</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-amber-300 ml-2">•</span>
+                            <span>البحث عن أدلة على وجود حياة سابقة</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-panel p-8 rounded-2xl mt-8 text-center">
+                <h3 class="text-2xl font-bold mb-4">مهمات فضائية لاستكشاف الكويكبات</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🛰️</div>
+                        <div class="font-bold">Dawn</div>
+                        <div class="text-sm text-gray-400">سيريس وفيسـتا</div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🚀</div>
+                        <div class="font-bold">Hayabusa2</div>
+                        <div class="text-sm text-gray-400">ريوغو</div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🔬</div>
+                        <div class="font-bold">OSIRIS-REx</div>
+                        <div class="text-sm text-gray-400">بينو</div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <div class="font-bold">DART</div>
+                        <div class="text-sm text-gray-400">دفاع كوكبي</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="border-t border-gray-800 py-12 px-6 mt-20">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0 text-center md:text-right">
+                    <h2 class="text-2xl font-bold mb-4">الموسوعة الفلكية</h2>
+                    <p class="text-gray-400">رحلة في أعماق النظام الشمسي</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-xl font-bold mb-4">مواضيع ذات صلة</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="../index.html" class="text-gray-400 hover:text-amber-300 transition-colors">الرئيسية</a>
+                        <a href="../Galaxy/index.html" class="text-gray-400 hover:text-amber-300 transition-colors">المجرات</a>
+                        <a href="../star/index.html" class="text-gray-400 hover:text-amber-300 transition-colors">النجوم</a>
+                        <a href="../Asterisms/index.html" class="text-gray-400 hover:text-amber-300 transition-colors">الكوكبات</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 الموسوعة الفلكية. جميع الحقوق محفوظة.</p>
+                       <p class="mt-2">تصميم وتطوير:خالد الزعبي</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- scripit -->
     <script src="index.js"></script>
