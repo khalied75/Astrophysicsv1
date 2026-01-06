@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomy</title>
+    <!-- css -->
+       <link href="./output.css" rel="stylesheet">
+       <!-- style -->
+        <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+        }
+        .astronomy-bg {
+            background-image: url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #4f46e5;
+            bottom: -5px;
+            right: 0;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .type-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        .type-card:hover {
+            border-top-color: #4f46e5;
+        }
+        .back-btn {
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            transform: translateX(5px);
+        }
+        .constellation-img {
+            height: 200px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+        }
+        .constellation-drawing {
+            font-family: 'Segoe UI Symbol', 'Arial Unicode MS', sans-serif;
+            font-size: 24px;
+            line-height: 1.5;
+            text-align: center;
+            direction: ltr;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        /* هامبرجر مينو */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+        }
+        @media (max-width: 1024px) {
+            .hamburger-menu {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                padding: 8px;
+            }
+            .desktop-nav {
+                display: none;
+            }
+        }
+        @media (min-width: 1025px) {
+            .hamburger-menu {
+                display: none !important;
+            }
+            .desktop-nav {
+                display: flex;
+            }
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1f3c 0%, #0d1129 100%);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .mobile-menu.active {
+            right: 0;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .close-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        .mobile-nav-link {
+            display: block;
+            padding: 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent;
+        }
+        .mobile-nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-right-color: #4f46e5;
+            transform: translateX(-5px);
+        }
+        .mobile-nav-link.active {
+            background: rgba(79, 70, 229, 0.2);
+            border-right-color: #4f46e5;
+            color: #a5b4fc;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        .hamburger-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .hamburger-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        .season-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+        .spring { background: #10b981; color: white; }
+        .summer { background: #f59e0b; color: white; }
+        .autumn { background: #d97706; color: white; }
+        .winter { background: #3b82f6; color: white; }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 12px;
+            text-align: right;
+            border: 1px solid #374151;
+        }
+        .comparison-table th {
+            background: #1e3a8a;
+            color: white;
+        }
+        .comparison-table tr:nth-child(even) {
+            background: #1f2937;
+        }
+        </style>
+</head>
+<body class="bg-gray-900 text-white">
+     <!-- شريط التنقل العلوي -->
+    <nav class="gradient-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <!-- الشعار والعنوان -->
+                <div class="logo-container">
+                    <div class="w-10 h-10 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg font-bold">✨</span>
+                    </div>
+                    <div class="text-right">
+                        <h1 class="text-xl md:text-2xl font-bold">الموسوعة الفلكية</h1>
+                    </div>
+                </div>
+                
+                <!-- زر هامبرجر للجوال -->
+                <div class="lg:hidden">
+                    <div class="hamburger-btn" id="hamburger-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <!-- قائمة التنقل للكمبيوتر -->
+                <div class="hidden lg:flex desktop-nav items-center gap-8">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">الرئيسية</a>
+                    <a href="blackhole-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">الثقوب السوداء</a>
+                    <a href="galaxy-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">المجرات</a>
+                    <a href="star-types.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">النجوم</a>
+                    <a href="constellation-types.html" class="nav-link text-white px-3 py-2 text-lg border-b-2 border-cyan-500">الكوكبات</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-lg">الكويكبات</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة المتنقلة للجوال -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="close-menu" id="close-menu">×</div>
+        
+        <!-- روابط التنقل الرئيسية -->
+        <div class="mt-10">
+            <a href="index.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🏠</span>
+                    <span class="text-lg">الصفحة الرئيسية</span>
+                </div>
+            </a>
+            <a href="blackhole-types.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⚫</span>
+                    <span class="text-lg">أنواع الثقوب السوداء</span>
+                </div>
+            </a>
+            <a href="galaxy-types.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌌</span>
+                    <span class="text-lg">أنواع المجرات</span>
+                </div>
+            </a>
+            <a href="star-types.html" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">⭐</span>
+                    <span class="text-lg">أنواع النجوم</span>
+                </div>
+            </a>
+            <a href="constellation-types.html" class="mobile-nav-link active">
+                <div class="flex items-center">
+                    <span class="ml-3">✨</span>
+                    <span class="text-lg">أنواع الكوكبات</span>
+                </div>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <div class="flex items-center">
+                    <span class="ml-3">🌠</span>
+                    <span class="text-lg">أنواع الكويكبات</span>
+                </div>
+            </a>
+        </div>
+        
+        <!-- معلومات الاتصال -->
+        <div class="mt-12 pt-6 border-t border-gray-700">
+            <p class="text-sm text-gray-400 mb-2">الموسوعة الفلكية © 2023</p>
+            <p class="text-xs text-gray-500">نافذتك إلى الكون الواسع</p>
+        </div>
+    </div>
+
+    <!-- زر العودة للصفحة الرئيسية -->
+    <div class="container mx-auto py-6 px-6">
+        <a href="index.html" class="back-btn inline-flex items-center text-cyan-400 hover:text-cyan-300">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            العودة للصفحة الرئيسية
+        </a>
+    </div>
+
+    <!-- محتوى صفحة أنواع الكوكبات -->
+    <main class="container mx-auto py-8 px-6">
+        <!-- عنوان الصفحة -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">الكوكبات والأنماط النجمية</h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                رسومات سماوية ابتكرها القدماء من الروم والعرب والبابليين لتسهيل رصد النجوم والتنقل في الليل
+            </p>
+        </div>
+
+        <!-- مقدمة -->
+        <div class="bg-gradient-to-r from-blue-900 to-cyan-900 p-8 rounded-2xl mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-300">ما هي الكوكبات؟</h2>
+            <p class="text-lg leading-relaxed mb-4">
+                الكوكبات هي أنماط نجمية تخيلها القدماء لتمثل أشكالاً من الأساطير والحيوانات والأشياء. 
+                استخدمها البابليون والمصريون واليونانيون والعرب للتنقل والتقويم والزراعة.
+            </p>
+            <p class="text-lg leading-relaxed">
+                حالياً، هناك 88 كوكبة معترف بها رسمياً من الاتحاد الفلكي الدولي (IAU) تغطي السماء بأكملها.
+            </p>
+        </div>
+
+        <!-- كوكبات مشهورة -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">الكوكبات الأكثر شهرة</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- الدب الأكبر -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🐻</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">الدب الأكبر (Ursa Major)</h3>
+                    <div class="mb-4">
+                        <span class="season-badge spring">الربيع</span>
+                        <span class="season-badge summer">الصيف</span>
+                        <span class="season-badge autumn">الخريف</span>
+                        <span class="season-badge winter">الشتاء</span>
+                    </div>
+                    <div class="constellation-drawing">
+                        ●━━●━━●<br>
+                        │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        ●━━●━━●<br>
+                        &nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        &nbsp;&nbsp;&nbsp;●━━●
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        من أشهر الكوكبات في النصف الشمالي للكرة الأرضية. تحتوي على النجوم السبعة المعروفة باسم "بنات نعش" أو "Big Dipper".
+                        تساعد في تحديد النجم القطبي والاتجاه الشمالي.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">مرئية طوال السنة في النصف الشمالي</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">استخدمت للملاحة منذ آلاف السنين</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
+                            <span class="text-sm">ثالث أكبر كوكبة في السماء</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الدب الأصغر -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-indigo-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🐻‍❄️</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">الدب الأصغر (Ursa Minor)</h3>
+                    <div class="mb-4">
+                        <span class="season-badge spring">الربيع</span>
+                        <span class="season-badge summer">الصيف</span>
+                        <span class="season-badge autumn">الخريف</span>
+                        <span class="season-badge winter">الشتاء</span>
+                    </div>
+                    <div class="constellation-drawing">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;●<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        &nbsp;&nbsp;&nbsp;●─●─●<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        &nbsp;&nbsp;&nbsp;●─●─●
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تحتوي على النجم القطبي (Polaris) الذي يشير إلى الشمال تقريباً. 
+                        شكلها يشبه الدب الأكبر لكنه أصغر. النجم القطبي كان يستخدم للملاحة البحرية.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تحتوي على النجم القطبي (Polaris)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full ml-2"></div>
+                            <span class="text-sm">مرئية طوال السنة في النصف الشمالي</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full ml-2"></div>
+                            <span class="text-sm">أصغر من الدب الأكبر</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الأسد -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🦁</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">كوكبة الأسد (Leo)</h3>
+                    <div class="mb-4">
+                        <span class="season-badge spring">الربيع</span>
+                        <span class="season-badge summer">الصيف</span>
+                    </div>
+                    <div class="constellation-drawing">
+                        &nbsp;&nbsp;&nbsp;●&nbsp;&nbsp;&nbsp;●<br>
+                        &nbsp;&nbsp;●&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;●<br>
+                        ●━━━━●━━━━●<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;●
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        إحدى كوكبات دائرة البروج. تمثل الأسد في الأساطير اليونانية. 
+                        تحتوي على النجم Regulus (القلب) وهو أحد ألمع النجوم في السماء.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full ml-2"></div>
+                            <span class="text-sm">واحدة من كوكبات البروج الـ12</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full ml-2"></div>
+                            <span class="text-sm">أفضل أوقات الرصد: الربيع</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تحتوي على نجوم زرقاء ساخنة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الحواء (راعي الثعبان) -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🧙‍♂️</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">كوكبة الحواء (Ophiuchus)</h3>
+                    <div class="mb-4">
+                        <span class="season-badge summer">الصيف</span>
+                    </div>
+                    <div class="constellation-drawing">
+                        &nbsp;&nbsp;&nbsp;●<br>
+                        &nbsp;&nbsp;●&nbsp;●<br>
+                        ●─●─●─●<br>
+                        &nbsp;&nbsp;●&nbsp;●<br>
+                        &nbsp;&nbsp;&nbsp;●
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        تمثل رجلاً يمسك ثعباناً. تقع على خط البروج لكنها ليست من الكوكبات الـ12 التقليدية.
+                        تحتوي على العديد من العناقيد النجمية والسدم.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تقع على خط البروج ولكن ليست من الـ12</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
+                            <span class="text-sm">أفضل أوقات الرصد: الصيف</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
+                            <span class="text-sm">كوكبة كبيرة تحتوي على نجوم عديدة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ذات الكرسي -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">👑</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">كوكبة ذات الكرسي (Cassiopeia)</h3>
+                    <div class="mb-4">
+                        <span class="season-badge autumn">الخريف</span>
+                        <span class="season-badge winter">الشتاء</span>
+                    </div>
+                    <div class="constellation-drawing">
+                        &nbsp;&nbsp;●<br>
+                        &nbsp;●&nbsp;&nbsp;●<br>
+                        ●&nbsp;&nbsp;&nbsp;&nbsp;●
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        على شكل حرف W أو M حسب وقت السنة. تمثل ملكة أثيوبيا في الأساطير اليونانية.
+                        تقع مقابل الدب الأكبر وتدور حول النجم القطبي.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">مرئية طوال السنة في النصف الشمالي</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">سهلة التعرف بسبب شكلها المميز</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تحتوي على العديد من العناقيد المفتوحة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الأفعى -->
+                <div class="type-card bg-gray-800 p-6 rounded-2xl shadow-xl card-hover">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🐍</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-center">كوكبة الأفعى (Serpens)</h3>
+                    <div class="mb-4">
+                        <span class="season-badge summer">الصيف</span>
+                    </div>
+                    <div class="constellation-drawing">
+                        ●─●─●<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;●─●<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;│<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;●─●
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        الكوكبة الوحيدة المقسمة إلى جزأين: رأس الأفعى (Serpens Caput) وذيل الأفعى (Serpens Cauda).
+                        تقع بين كوكبة الحواء وكوكبة العقاب.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">الكوكبة الوحيدة المنقسمة لجزأين</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">أفضل أوقات الرصد: الصيف</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-red-500 rounded-full ml-2"></div>
+                            <span class="text-sm">تحتوي على سديم النسر الشهير</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الفرق بين علم الفلك وعلم التنجيم -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">الفرق بين علم الفلك وعلم التنجيم</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-gradient-to-br from-blue-900 to-cyan-900 p-6 rounded-2xl">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-cyan-300">علم الفلك ⭐</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-cyan-300 ml-2">✓</span>
+                            <span><strong>علم تجريبي</strong> مبني على الملاحظة والقياس</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-300 ml-2">✓</span>
+                            <span><strong>يدرس الأجرام السماوية</strong> وخصائصها الفيزيائية</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-300 ml-2">✓</span>
+                            <span><strong>يستخدم الرياضيات والفيزياء</strong> لفهم الكون</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-300 ml-2">✓</span>
+                            <span><strong>قابل للاختبار والتكذيب</strong> علمياً</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-cyan-300 ml-2">✓</span>
+                            <span><strong>يقدم تنبؤات قابلة للتحقق</strong> مثل خسوف القمر</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-900 to-pink-900 p-6 rounded-2xl">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-pink-300">علم التنجيم ✨</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-pink-300 ml-2">✗</span>
+                            <span><strong>معتقد وليس علماً</strong> مبني على التقاليد</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-300 ml-2">✗</span>
+                            <span><strong>يدعي تأثير النجوم</strong> على حياة الإنسان</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-300 ml-2">✗</span>
+                            <span><strong>لا يستند إلى أدلة علمية</strong> قابلة للتحقق</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-300 ml-2">✗</span>
+                            <span><strong>غير قابل للاختبار العلمي</strong> أو التكذيب</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-300 ml-2">✗</span>
+                            <span><strong>يقدم تنبؤات عامة</strong> غير قابلة للتحقق</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">مقارنة علمية</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>الجانب</th>
+                            <th>علم الفلك</th>
+                            <th>علم التنجيم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>الطبيعة</strong></td>
+                            <td>علم طبيعي تجريبي</td>
+                            <td>معتقد تقليدي/روحاني</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الأساس العلمي</strong></td>
+                            <td>فيزياء، رياضيات، ملاحظة</td>
+                            <td>تقاليد، أساطير، معتقدات</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الدقة</strong></td>
+                            <td>دقيق جداً (مثل تنبؤات الكسوف)</td>
+                            <td>غير دقيق، تنبؤات عامة</td>
+                        </tr>
+                        <tr>
+                            <td><strong>التطبيق</strong></td>
+                            <td>الملاحة، الأبحاث، الاتصالات</td>
+                            <td>التنبؤ بالمستقبل، الأبراج</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الاعتراف الأكاديمي</strong></td>
+                            <td>معترف به في جميع الجامعات</td>
+                            <td>غير معترف به أكاديمياً</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- أنظمة الإحداثيات الفلكية -->
+        <div class="mb-16">
+            <h2 class="section-title text-3xl md:text-4xl font-bold mb-8">أنظمة الإحداثيات الفلكية</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-green-900 to-emerald-900 p-6 rounded-2xl">
+                    <h3 class="text-2xl font-bold mb-4 text-center">نظام غرينتش (النظام الأفقي)</h3>
+                    <p class="text-gray-300 mb-4">
+                        يستخدم للإحداثيات المحلية بناءً على موقع الراصد على الأرض. يعتمد على:
+                    </p>
+                    <ul class="space-y-3 mb-4">
+                        <li class="flex items-start">
+                            <span class="text-green-300 ml-2">•</span>
+                            <span><strong>السمت (Azimuth)</strong>: الزاوية من الشمال نحو الشرق (0° إلى 360°)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-300 ml-2">•</span>
+                            <span><strong>الارتفاع (Altitude)</strong>: الزاوية فوق الأفق (0° إلى 90°)</span>
+                        </li>
+                    </ul>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">استخداماته:</h4>
+                        <p>• تحديد مواقع الأجرام بالنسبة للأفق<br>• الملاحة الأرضية والبحرية<br>• التلسكوبات الأرضية</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-900 to-indigo-900 p-6 rounded-2xl">
+                    <h3 class="text-2xl font-bold mb-4 text-center">نظام RA/Dec (النظام الاستوائي)</h3>
+                    <p class="text-gray-300 mb-4">
+                        نظام إحداثيات عالمي لا يعتمد على موقع الراصد. يعتمد على:
+                    </p>
+                    <ul class="space-y-3 mb-4">
+                        <li class="flex items-start">
+                            <span class="text-blue-300 ml-2">•</span>
+                            <span><strong>المطلع المستقيم (RA)</strong>: يقاس بالساعات (0h إلى 24h)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-300 ml-2">•</span>
+                            <span><strong>الميل (Dec)</strong>: يقاس بالدرجات (+90° إلى -90°)</span>
+                        </li>
+                    </ul>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">استخداماته:</h4>
+                        <p>• خرائط النجوم والأجرام السماوية<br>• الأبحاث الفلكية العالمية<br>• تحديد مواقع دقيقة للنجوم</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- مقارنة بين النظامين -->
+            <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-2xl mt-8">
+                <h3 class="text-xl font-bold mb-4">الفرق بين النظامين</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>المقارنة</th>
+                            <th>نظام غرينتش (الأفقي)</th>
+                            <th>نظام RA/Dec (الاستوائي)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>الاعتماد على الموقع</strong></td>
+                            <td>يعتمد على موقع الراصد</td>
+                            <td>لا يعتمد على موقع الراصد</td>
+                        </tr>
+                        <tr>
+                            <td><strong>التغير مع الوقت</strong></td>
+                            <td>يتغير مع دوران الأرض</td>
+                            <td>ثابت تقريباً (لآلاف السنين)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الدقة</strong></td>
+                            <td>للاستخدام المحلي</td>
+                            <td>للاستخدام العالمي</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الاستخدام الرئيسي</strong></td>
+                            <td>الرصد الميداني والملاحة</td>
+                            <td>الأبحاث الفلكية والخرائط</td>
+                        </tr>
+                        <tr>
+                            <td><strong>مثال على الإحداثيات</strong></td>
+                            <td>سمت: 45°، ارتفاع: 30°</td>
+                            <td>RA: 5h 55m 10s، Dec: +7° 24' 25"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- معلومات إضافية -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gradient-to-br from-yellow-900 to-amber-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">تاريخ الكوكبات</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span><strong>البابليون (3000 ق.م)</strong>: أول من رسم الأنماط النجمية</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span><strong>المصريون القدماء</strong>: ربطوها بآلهتهم وفصول السنة</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span><strong>اليونانيون</strong>: طوروا الأساطير المرتبطة بالكوكبات</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span><strong>العرب</strong>: أضافوا أسماء عربية للعديد من النجوم</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-yellow-300 ml-2">•</span>
+                        <span><strong>العصر الحديث (1922)</strong>: الاتحاد الفلكي الدولي يحدد 88 كوكبة رسمية</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-gradient-to-br from-purple-900 to-pink-900 p-6 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">حقائق عن الكوكبات</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-purple-300 ml-2">•</span>
+                        <span>الكوكبات ليست قريبة من بعضها - النجوم فيها على مسافات مختلفة</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-purple-300 ml-2">•</span>
+                        <span>تبدو الكوكبات مختلفة في النصفين الشمالي والجنوبي للكرة الأرضية</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-purple-300 ml-2">•</span>
+                        <span>بسبب حركة الأرض، تظهر كوكبات مختلفة في فصول مختلفة</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-purple-300 ml-2">•</span>
+                        <span>بعض الكوكبات مرئية طوال السنة (كوكبات قريبة من القطب)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-purple-300 ml-2">•</span>
+                        <span>الأبراج الفلكية الـ12 تمثل جزءاً صغيراً من الكوكبات الكلية</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="gradient-bg py-12 px-6 mt-20">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0 text-center md:text-right">
+                    <h2 class="text-2xl font-bold mb-4">الموسوعة الفلكية</h2>
+                    <p class="text-gray-400">نافذتك إلى الكون الواسع</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-xl font-bold mb-4">استكشف أيضاً</h3>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">الصفحة الرئيسية</a>
+                        <a href="blackhole-types.html" class="text-gray-400 hover:text-white transition-colors">أنواع الثقوب السوداء</a>
+                        <a href="galaxy-types.html" class="text-gray-400 hover:text-white transition-colors">أنواع المجرات</a>
+                        <a href="star-types.html" class="text-gray-400 hover:text-white transition-colors">أنواع النجوم</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 الموسوعة الفلكية. جميع الحقوق محفوظة.</p>
+                <p class="mt-2">تصميم وتطوير: فريق علم الفلك</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- sripit -->
+     <script src="index.js"></script>
+</body>
+</html>
